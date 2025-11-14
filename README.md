@@ -73,7 +73,7 @@ To view all available plugins:
 
 ### Reflexion
 
-Collection of commands that force LLM to reflect on previus response and output. Based on papers like "Self-Refine" and "Reflexion". This techniques improve the output of large language models by introducing feedback and refinement loops.
+Collection of commands that force LLM to reflect on previus response and output. Based on papers like [Self-Refine](https://arxiv.org/abs/2305.12966) and [Reflexion](https://arxiv.org/abs/2303.11366). This techniques improve the output of large language models by introducing feedback and refinement loops.
 
 ```bash
 /plugin install reflexion@NeoLabHQ/quality-agent
@@ -83,20 +83,20 @@ They proven to **increase output quality to 8–21%** based on both automatic me
 
 Full list of included patterns and techniques:
 
-- Self-Refinement / Iterative Refinement - One model generates, then reviews and improves its own output
-- Constitutional AI (CAI) / RLAIF - One model generates responses, another critiques them based on principles
-- Critic-Generator or Verifier-Generator Architecture - Generator model creates outputs, Critic/verifier model evaluates and provides feedback
-- LLM-as-a-Judge - One LLM evaluates/scores outputs from another LLM
-- Debate / Multi-Agent Debate - Multiple models propose and critique solutions
-- Generate-Verify-Refine (GVR) - Three-stage process: generate → verify → refine based on verification
+- [Self-Refinement / Iterative Refinement](https://arxiv.org/abs/2303.17651) - One model generates, then reviews and improves its own output
+- [Constitutional AI (CAI) / RLAIF](https://arxiv.org/abs/2212.08073) - One model generates responses, another critiques them based on principles
+- [Critic-Generator or Verifier-Generator Architecture](https://arxiv.org/abs/2305.12966) - Generator model creates outputs, Critic/verifier model evaluates and provides feedback
+- [LLM-as-a-Judge](https://arxiv.org/abs/2306.05685) - One LLM evaluates/scores outputs from another LLM
+- [Debate / Multi-Agent Debate](https://arxiv.org/abs/2305.14325) - Multiple models propose and critique solutions
+- [Generate-Verify-Refine (GVR)](https://arxiv.org/abs/2305.02424) - Three-stage process: generate → verify → refine based on verification
 
 On top of that plugin based on [Agentic Context Engineering](https://arxiv.org/abs/2510.04618) paper that uses memeory updates after reflection, that **consistently outperform strong baselines by 10.6%** on agents.
 
 Also inlcudes following techniques:
 
-- Chain-of-Verification (CoVe) - model generates answer, then verification questions, then revises
-- Tree of Thoughts (ToT) - explores multiple reasoning paths with evaluation
-- Process Reward Models (PRM) - evaluate reasoning steps rather than just final answers
+- [Chain-of-Verification (CoVe)](https://arxiv.org/abs/2305.13888) - model generates answer, then verification questions, then revises
+- [Tree of Thoughts (ToT)](https://arxiv.org/abs/2305.10601) - explores multiple reasoning paths with evaluation
+- [Process Reward Models (PRM)](https://arxiv.org/abs/2211.07633) - evaluate reasoning steps rather than just final answers
 
 ## Based on <a name="based-on"></a>
 
