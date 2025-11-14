@@ -1,8 +1,8 @@
-# Quality Agent Marketplace
+# Context Engineering Kit
 
 Hand-crafted production ready Claude Code plugin marketplace focused on improving agent result quality.
 
-**Philosophy:** Easy to install and use, with minimal token footprint.
+Contains collection of plugins that allow to use proven techniques and patterns for context engineering with minimal efforts.
 
 ## Key Features
 
@@ -11,6 +11,7 @@ Hand-crafted production ready Claude Code plugin marketplace focused on improvin
 - **Quality-Focused** - Each plugin focused on meaningfully improving agent result over specific area. Developoed by experienced developers that need to get relaible results on production code.
 - **Granular** - Install only the plugins you need. Each plugin loads only its specific agents, commands, and skills.
 - **Well-targeted** - Marketplace contains minimal amount of plugins, without overlap and redundant skills. It is based on prompts that used by our company developers daily for long time, with combained plugins from high quality projects. If you looking for more general plugins, take a loog at [Based on section](#based-on)
+- **Scientifically proven** - Plugins are based on proven techniques and patterns that were tested by well-trusted benchmarks and studies.
 
 ## Quick Start
 
@@ -23,7 +24,7 @@ Add this marketplace to Claude Code:
 claude
 
 # Add the Perplexity marketplace
-/plugin marketplace add NeoLabHQ/quality-agent
+/plugin marketplace add NeoLabHQ/context-engineering-kit
 ```
 
 This makes all plugins available for installation, but does not load any agents or tools into your context.
@@ -32,10 +33,23 @@ This makes all plugins available for installation, but does not load any agents 
 
 ```bash
 # Install any plugins
-/plugin install reflexion@NeoLabHQ/quality-agent
+/plugin install reflexion@NeoLabHQ/context-engineering-kit
 ```
 
 Each installed plugin loads only its specific agents, commands, and skills into Claude's context.
+
+### Step 3: Use Plugins
+
+```bash
+# start claude code
+> claude "suggest how to improve codebase"
+
+# Reflect on previus response and improve it if needed
+> /reflextion:reflect
+
+# Identify issues and stretegies to solve them, and update CLAUDE.md with this knowledge
+> /reflextion:memorize
+```
 
 ## Full list of Plugins
 
@@ -76,7 +90,7 @@ Full list of included patterns and techniques:
 - Debate / Multi-Agent Debate - Multiple models propose and critique solutions
 - Generate-Verify-Refine (GVR) - Three-stage process: generate → verify → refine based on verification
 
-On top of that plugin based on "Agentic Context Engineering" that uses memeory updates after reflection, that **consistently outperform strong baselines by 10.6%** on agents.
+On top of that plugin based on [Agentic Context Engineering](https://arxiv.org/abs/2510.04618) paper that uses memeory updates after reflection, that **consistently outperform strong baselines by 10.6%** on agents.
 
 Also inlcudes following techniques:
 
