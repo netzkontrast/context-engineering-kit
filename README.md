@@ -4,7 +4,7 @@ Hand-crafted production ready Claude Code plugin marketplace focused on improvin
 
 **Philosophy:** Easy to install and use, with minimal token footprint.
 
-## Features
+## Key Features
 
 - **Simple to Use** - Easy to install and use without any dependencies. Contain automatically used skills and self-explanatory commands.
 - **Token-Efficient** - Carefully crafted prompts and architecture, prefering commands over skills, to minimize populating context with unnecessary information.
@@ -14,31 +14,73 @@ Hand-crafted production ready Claude Code plugin marketplace focused on improvin
 
 ## Quick Start
 
-Browse available plugins in [PLUGINS.md](PLUGINS.md)
+### Step 1: Add the Marketplace
 
-### Install a Plugin
+Add this marketplace to Claude Code:
 
 ```bash
-cd ~/.claude-code/plugins/
-git clone https://github.com/neolab/quality-agent.git
-ln -s quality-agent/plugins/code-quality/code-review-checklist ./
+# Open Claude Code
+claude
+
+# Add the Perplexity marketplace
+/plugin marketplace add NeoLabHQ/quality-agent
 ```
 
-Then use it in Claude Code:
+This makes all plugins available for installation, but does not load any agents or tools into your context.
 
+### Step 2: Install Plugins
+
+```bash
+# Install any plugins
+/plugin install reflexion@NeoLabHQ/quality-agent
 ```
-/review-checklist
+
+Each installed plugin loads only its specific agents, commands, and skills into Claude's context.
+
+## Full list of Plugins
+
+To view all available plugins:
+
+```bash
+/plugin
 ```
 
-## Plugin Categories
+- [Reflexion](#reflexion) - Introduce feedback and refinement loops to improve output quality.
+- [Code Review](#code-review) - Introduce codebase and PR review commands and skills using multiple specialized agents.
+- [Git](#git) - Introduces commands for commit and PRs creation.
+- [Test Driven Development](#test-driven-development) - Introduces commands for test-driven development, common anti-patterns and skills for testing using subagents.
+- [Subagent Driven Development](#subagent-driven-development) - Introduces skills for subagent-driven development, dispatches fresh subagent for each task with code review between tasks, enabling fast iteration with quality gates.
+- [Domain Driven Development](#domain-driven-development) - Introduces skills for domain-driven development, focused on quality of code, includes Clean Architecture, SOLID principles, and other design patterns.
+- [Spec Driven Development](#spec-driven-development) - Introduces skills for specification-driven development, based on Github Spec Kit and OpenSpec.
+- [Debug and Root Cause Analysis](#debug-and-root-cause-analysis) - Introduces commands for analytisis of root cause of issues and problems, including 5 Whys, Cause and Effect Analysis, and other techniques.
+- [Skill and Command Creator](#skill-and-command-creator) - Commands for writing and refining skills and commands for Claude Code, includes Anthropic Best Practices and Persuasion Principles.
 
-- **Code Quality** - Reviews, linting, style checks
-- **Testing** - Test generation, coverage, validation
-- **Documentation** - Docs generation, maintenance
+### Reflexion
 
-## Contributing
+Collection of commands that force LLM to reflect on previus response and output. Based on papers like "Self-Refine" and "Reflexion". This techniques improve the output of large language models by introducing feedback and refinement loops.
 
-We welcome high-quality plugin contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+```bash
+/plugin install reflexion@NeoLabHQ/quality-agent
+```
+
+They proven to **increase output quality to 8–21%** based on both automatic metrics and human preferences across seven diverse tasks, including dialogue generation, coding and mathematical reasoning, when compared to standard one-step model outputs.
+
+Full list of included patterns and techniques:
+
+- Self-Refinement / Iterative Refinement - One model generates, then reviews and improves its own output
+- Constitutional AI (CAI) / RLAIF - One model generates responses, another critiques them based on principles
+- Critic-Generator or Verifier-Generator Architecture - Generator model creates outputs, Critic/verifier model evaluates and provides feedback
+- LLM-as-a-Judge - One LLM evaluates/scores outputs from another LLM
+- Debate / Multi-Agent Debate - Multiple models propose and critique solutions
+- Generate-Verify-Refine (GVR) - Three-stage process: generate → verify → refine based on verification
+
+On top of that plugin based on "Agentic Context Engineering" that uses memeory updates after reflection, that **consistently outperform strong baselines by 10.6%** on agents.
+
+Also inlcudes following techniques:
+
+- Chain-of-Verification (CoVe) - model generates answer, then verification questions, then revises
+- Tree of Thoughts (ToT) - explores multiple reasoning paths with evaluation
+- Process Reward Models (PRM) - evaluate reasoning steps rather than just final answers
 
 ## Based on <a name="based-on"></a>
 
@@ -62,3 +104,11 @@ Servers recommended for use with this marketplace:
 - [Context7](https://github.com/upstash/context7)
 - [Serena](https://github.com/oraios/serena)
 - [Perplexity Model Context Protocol](https://github.com/perplexityai/modelcontextprotocol)
+
+## Recomended Specification Driven Development Projects
+
+This marketplace incapsualte best from this project, but you may want to use full power of this techniques from following projects:
+
+- [Github Spec Kit](https://github.com/github/spec-kit)
+- [OpenSpec](https://github.com/Fission-AI/OpenSpec)
+- [BMad Method](https://github.com/bmad-code-org/BMAD-METHOD)

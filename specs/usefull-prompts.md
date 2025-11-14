@@ -42,6 +42,12 @@ Use when executing implementation plans with independent tasks in the current se
 
 Use when implementing any feature or bugfix, before writing implementation code - write the test first, watch it fail, write minimal code to pass; ensures tests actually verify behavior by requiring failure first
 
+## testing-anti-patterns
+
+[link](https://github.com/obra/superpowers/blob/main/skills/testing-anti-patterns/SKILL.md)
+
+Use when writing or changing tests, adding mocks, or tempted to add test-only methods to production code - prevents testing mock behavior, production pollution with test-only methods, and mocking without understanding dependencies
+
 ## testing-skills-with-subagents
 
 [link](https://github.com/obra/superpowers/blob/main/skills/testing-skills-with-subagents/SKILL.md)
