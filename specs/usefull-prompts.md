@@ -74,27 +74,19 @@ Use when facing 3+ independent failures that can be investigated without shared 
 ## code-review
 
 [x][link](https://github.com/anthropics/claude-code/blob/main/plugins/code-review/commands/code-review.md)
-[link](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/commands/review-pr.md)
-[code reviewer agent](https://github.com/obra/superpowers/blob/main/agents/code-reviewer.md)
-[code-reviewer agent](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/code-reviewer.md)
-[code-simplifier agent](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/code-simplifier.md)
-[comment-analyzer agent](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/comment-analyzer.md)
-[pr-test-analyzer agent](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/pr-test-analyzer.md)
-[silent-failure-hunter agent](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/silent-failure-hunter.md)
-[type-design-analyzer agent](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/type-design-analyzer.md)
+[x][code reviewer agent](https://github.com/obra/superpowers/blob/main/agents/code-reviewer.md)
 
 Performs automated code review on a pull request using multiple specialized agents.
 
 ## pr-review-toolkit
 
-- [command](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/commands/review-pr.md)
-- [code-reviewer](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/code-reviewer.md)
-- [code-simplifier](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/code-simplifier.md)
-- [comment-analyzer](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/comment-analyzer.md)
-comment-analyzer.md
-- [pr-test-analyzer](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/pr-test-analyzer.md)
-- [silent-failure-hunter](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/silent-failure-hunter.md)
-- [type-design-analyzer](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/type-design-analyzer.md)
+[x][command](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/commands/review-pr.md)
+[x][code-reviewer](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/code-reviewer.md)
+[x][code-simplifier](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/code-simplifier.md)
+[x][comment-analyzer](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/comment-analyzer.md)
+[x][pr-test-analyzer](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/pr-test-analyzer.md)
+[x][silent-failure-hunter](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/silent-failure-hunter.md)
+[x][type-design-analyzer](https://github.com/anthropics/claude-code/blob/main/plugins/pr-review-toolkit/agents/type-design-analyzer.md)
 
 A comprehensive collection of specialized agents for thorough pull request review, covering code comments, test coverage, error handling, type design, code quality, and code simplification.
 
@@ -106,12 +98,12 @@ Guide for creating high-quality MCP (Model Context Protocol) servers that enable
 
 ## prompt-engineering-patterns
 
-[link](https://github.com/wshobson/agents/blob/main/plugins/llm-application-dev/skills/prompt-engineering-patterns/SKILL.md)
+[x][link](https://github.com/wshobson/agents/blob/main/plugins/llm-application-dev/skills/prompt-engineering-patterns/SKILL.md)
 
 Master advanced prompt engineering techniques to maximize LLM performance, reliability, and controllability in production. Use when optimizing prompts, improving LLM outputs, or designing production prompt templates.
 
 ## brainstorming
 
-[link](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md)
+[x][link](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md)
 
 Use when creating or developing, before writing code or implementation plans - refines rough ideas into fully-formed designs through collaborative questioning, alternative exploration, and incremental validation. Don't use during clear 'mechanical' processes
