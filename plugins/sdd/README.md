@@ -1,633 +1,654 @@
-# SDD (Specification Driven Development) Plugin
+# Spec-Driven Development (SDD) Plugin
 
-A comprehensive workflow for specification-driven feature development with specialized agents and systematic documentation. Based on GitHub Spec Kit and OpenSpec standards.
+Comprehensive specification-driven development workflow that transforms vague ideas into production-ready implementations through structured planning, architecture design, and quality-gated execution.
+
+Focused on:
+
+- **Specification-first development** - Define what to build before how to build it
+- **Multi-agent architecture** - Specialized agents for analysis, design, and implementation
+- **Iterative refinement** - Continuous validation and quality gates at each stage
+- **Documentation-driven** - Generate living documentation alongside implementation
+
+## Plugin Target
+
+- Reduce implementation rework - detailed specs catch issues before code is written
+- Improve architecture decisions - structured exploration of alternatives with trade-offs
+- Maintain project consistency - constitution and templates ensure uniform standards
+- Enable complex feature development - break down large features into manageable, testable tasks
 
 ## Overview
 
-The SDD Plugin provides a systematic 6-stage approach to building features through specification-driven development. Instead of jumping straight into code, it guides you through creating detailed specifications, understanding the codebase, planning architecture, implementing with clear tasks, and maintaining comprehensive documentation—resulting in well-designed features that integrate seamlessly with your existing code and follow industry standards.
+The SDD plugin implements a structured software development methodology based on GitHub Spec Kit, OpenSpec, and the BMad Method. It uses specialized AI agents to guide you through the complete development lifecycle: from initial brainstorming through specification, architecture design, task breakdown, implementation, and documentation.
 
-## Philosophy
+The workflow ensures that every feature is thoroughly specified, properly architected, and systematically implemented with quality gates at each stage. Each phase produces concrete artifacts (specification files, architecture documents, task lists) that serve as the source of truth for subsequent phases.
 
-Specification Driven Development (SDD) ensures quality and consistency by following a documentation-first approach. Key principles:
-
-- **Specify first** - Create detailed specifications before writing code
-- **Understand context** - Research the codebase and domain thoroughly
-- **Plan systematically** - Design architecture and break down into clear tasks
-- **Document continuously** - Maintain living documentation alongside implementation
-- **Quality gates** - Validate at each stage before proceeding
-
-This plugin embeds these practices into a structured workflow using specialized agents and industry-standard templates.
 
 ## Quick Start
 
-Here's a complete workflow example to get started with SDD:
-
 ```bash
-# start claude code
-claude 
+# Install the plugin
+/plugin install sdd@NeoLabHQ/context-engineering-kit
 
-# setup project constitution (run once per project)
-/sdd:00-setup Use NestJS as backend framework, strictly follow SOLID principles and Clean Architecture.
+# Set up project standards (one-time)
+/sdd:00-setup Use TypeScript, follow SOLID principles and Clean Architecture
 
-# Generate new feature specification
-/sdd:01-specify Add user authentication with OAuth
+# Start a new feature
+/sdd:01-specify Add user authentication with OAuth2 providers
 
-# Plan feature development
-/sdd:02-plan 
+# Plan the architecture
+/sdd:02-plan Use Passport.js for OAuth, prioritize security
 
-# Create detailed implementation tasks
-/sdd:03-tasks 
+# Create implementation tasks
+/sdd:03-tasks Use TDD approach, prioritize MVP features
 
-# Execute feature implementation
-/sdd:04-implement 
-
-# Document completed feature implementation
-/sdd:05-document Focus on API documentation
-```
-
-Each command builds on the previous one, creating a complete specification-driven development workflow from idea to documented implementation.
-
-## Commands
-
-The SDD plugin provides multiple commands for different stages of the specification-driven development workflow:
-
-### Core SDD Workflow Commands
-
-- **`/sdd:00-setup [project-params]`** - Create or update project constitution and templates
-- **`/sdd:01-specify [feature-description]`** - Create detailed feature specification
-- **`/sdd:02-plan [plan-specifics]`** - Plan feature development with architecture and research
-- **`/sdd:03-tasks [task-guidance]`** - Generate actionable, dependency-ordered tasks
-- **`/sdd:04-implement [implementation-prefs]`** - Execute implementation with quality review
-- **`/sdd:05-document [documentation-focus]`** - Document completed feature
-
-### Additional Commands
-
-- **`/sdd:brainstorm [initial-concept]`** - Refine rough ideas into fully-formed designs through collaborative questioning
-
-**Usage Examples:**
-
-```bash
-/sdd:01-specify Add user authentication with OAuth2
-/sdd:02-plan Focus on security and scalability
-/sdd:03-tasks Prioritize MVP features first
-/sdd:04-implement Use test-driven development
-/sdd:05-document Focus on API documentation
-```
-
-Each command guides you through its specific stage with specialized agents and quality gates.
-
-## The SDD Workflow
-
-The SDD plugin implements a systematic 6-stage workflow based on GitHub Spec Kit standards:
-
-### Stage 0: Setup (`/sdd:00-setup`)
-
-**Goal**: Establish project constitution and templates
-
-**What happens:**
-
-- Creates or updates `specs/constitution.md` with project principles and governance
-- Downloads and customizes templates from GitHub Spec Kit:
-  - Plan template
-  - Specification template
-  - Tasks template
-  - Spec checklist
-- Ensures consistency across all project specifications
-- Validates constitution against existing project patterns
-
-**Example:**
-
-```bash
-/sdd:00-setup Add observability principle and testing standards
-```
-
-### Stage 1: Specification (`/sdd:01-specify`)
-
-**Goal**: Create detailed feature specifications from natural language descriptions
-
-**What happens:**
-
-- Launches `business-analyst` agent to transform requirements into precise specifications
-- Creates feature branch and spec directory (`specs/XXX-feature-name/`)
-- Generates comprehensive specification using industry-standard template
-- Validates specification quality with checklist
-- Resolves ambiguities through structured clarification questions (max 3)
-- Produces testable acceptance criteria and success metrics
-
-**Example:**
-
-```bash
-/sdd:01-specify Add user authentication with OAuth2 support
-```
-
-**Output:**
-
-- `specs/001-user-auth/spec.md` - Complete feature specification
-- `specs/001-user-auth/spec-checklist.md` - Quality validation results
-
-### Stage 2: Planning (`/sdd:02-plan`)
-
-**Goal**: Research, explore codebase, and design architecture
-
-**What happens:**
-
-- Launches `researcher` agent for unknown technologies and dependencies
-- Launches `code-explorer` agents to analyze existing codebase patterns
-- Identifies similar features and architectural decisions
-- Resolves clarifying questions about implementation approach
-- Launches `software-architect` agents with different focus areas:
-  - Minimal changes approach
-  - Clean architecture approach
-  - Pragmatic balance approach
-- Presents architecture comparison with trade-offs and recommendations
-- Creates implementation blueprint with specific files and components
-
-**Example:**
-
-```bash
-/sdd:02-plan Focus on security and integration with existing auth system
-```
-
-**Output:**
-
-- `specs/001-user-auth/research.md` - Technology and codebase research
-- `specs/001-user-auth/design.minimal.md` - Minimal changes approach
-- `specs/001-user-auth/design.clean.md` - Clean architecture approach
-- `specs/001-user-auth/design.pragmatic.md` - Balanced approach
-- `specs/001-user-auth/design.md` - Final chosen design
-- `specs/001-user-auth/plan.md` - Complete implementation plan
-- `specs/001-user-auth/data-model.md` - Entity definitions
-- `specs/001-user-auth/contract.md` - API specifications
-
-### Stage 3: Task Breakdown (`/sdd:03-tasks`)
-
-**Goal**: Generate actionable, dependency-ordered implementation tasks
-
-**What happens:**
-
-- Launches `tech-lead` agent to break down specifications into concrete tasks
-- Creates dependency-ordered task list with complexity analysis
-- Organizes tasks by user story for independent implementation
-- Defines clear acceptance criteria and completion checkboxes
-- Identifies parallel execution opportunities
-- Provides implementation strategy (top-to-bottom vs bottom-to-top)
-- Flags high-risk tasks requiring decomposition or clarification
-
-**Example:**
-
-```bash
-/sdd:03-tasks Prioritize MVP features and use TDD approach
-```
-
-**Output:**
-
-- `specs/001-user-auth/tasks.md` - Complete task breakdown with dependencies
-
-### Stage 4: Implementation (`/sdd:04-implement`)
-
-**Goal**: Execute implementation plan with quality gates
-
-**What happens:**
-
-- Launches `developer` agents to implement tasks phase by phase
-- Follows strict task execution order and dependencies
-- Uses Test-Driven Development approach
-- Tracks progress by marking completed tasks in `tasks.md`
-- Validates each phase completion before proceeding
-- Performs automated quality review using multiple code review agents:
-  - Simplicity/DRY/Elegance review
-  - Bugs/Correctness review  
-  - Project conventions review
-- Presents findings and asks for resolution decisions
-
-**Example:**
-
-```bash
-/sdd:04-implement Focus on test coverage and follow existing patterns
-```
-
-### Stage 5: Documentation (`/sdd:05-document`)
-
-**Goal**: Document completed implementation
-
-**What happens:**
-
-- Launches `tech-writer` agent to create comprehensive documentation
-- Verifies all tasks are completed successfully
-- Updates project documentation with:
-  - API guides and usage examples
-  - Architecture documentation
-  - Integration instructions
-  - Troubleshooting guides
-- Updates README files for affected modules
-- Maintains documentation standards and consistency
-
-**Example:**
-
-```bash
-/sdd:05-document Focus on API documentation and integration examples
-```
-
-**Output:**
-
-- Updated documentation in `docs/` directory
-- Module-specific README updates
-- API reference and usage guides
-
-## Specialized Agents
-
-The SDD plugin uses 7 specialized agents, each designed for specific aspects of the development workflow:
-
-### `business-analyst`
-
-**Purpose**: Transforms vague business needs into precise, actionable requirements
-
-**Focus areas:**
-
-- Requirements discovery and stakeholder analysis
-- Competitive research and market intelligence  
-- Specification quality assurance
-- Acceptance criteria definition
-
-**When triggered:**
-
-- Automatically in Stage 1 (Specification)
-- Used for specification validation and quality checks
-
-**Output:**
-
-- Complete feature specifications with acceptance criteria
-- Business context and success metrics
-- Stakeholder analysis and constraints
-- Quality validation results
-
-### `code-explorer`
-
-**Purpose**: Deeply analyzes existing codebase features by tracing execution paths
-
-**Focus areas:**
-
-- Entry points and call chains
-- Data flow and transformations
-- Architecture layers and patterns
-- Dependencies and integrations
-- Implementation details
-
-**When triggered:**
-
-- Automatically in Stage 2 (Planning)
-- Can be launched manually for codebase exploration
-
-**Output:**
-
-- Entry points with file:line references
-- Step-by-step execution flow
-- Key components and responsibilities
-- Architecture insights
-- List of essential files to read
-
-### `researcher`
-
-**Purpose**: Investigates unknown technologies, libraries, frameworks, and dependencies
-
-**Focus areas:**
-
-- Technology and framework research
-- Library compatibility analysis
-- Best practices discovery
-- Performance and security considerations
-
-**When triggered:**
-
-- Automatically in Stage 2 (Planning) for unknowns
-- Can be launched manually for technical research
-
-**Output:**
-
-- Technology comparison and recommendations
-- Implementation guides and examples
-- Integration points and constraints
-- Security and performance considerations
-
-### `software-architect`
-
-**Purpose**: Designs feature architectures by analyzing existing patterns and creating implementation blueprints
-
-**Focus areas:**
-
-- Codebase pattern analysis
-- Architecture design with multiple approaches
-- Component design and interfaces
-- Implementation roadmaps and build sequences
-
-**When triggered:**
-
-- Automatically in Stage 2 (Planning)
-- Multiple agents launched with different focus areas
-
-**Output:**
-
-- Patterns and conventions analysis
-- Multiple architecture approaches with trade-offs
-- Complete component design
-- Implementation blueprints with specific files
-- Data flow and integration points
-
-### `tech-lead`
-
-**Purpose**: Breaks specifications into technical tasks using agile, TDD and kaizen principles
-
-**Focus areas:**
-
-- Task decomposition and dependency mapping
-- Implementation strategy selection
-- Risk assessment and complexity analysis
-- Agile sprint planning integration
-
-**When triggered:**
-
-- Automatically in Stage 3 (Tasks)
-- Can be launched manually for task planning
-
-**Output:**
-
-- Dependency-ordered task lists
-- Complexity and uncertainty ratings
-- Parallel execution opportunities
-- Implementation strategy recommendations
-
-### `developer`
-
-**Purpose**: Executes implementation tasks with strict adherence to acceptance criteria
-
-**Focus areas:**
-
-- Test-driven development implementation
-- Codebase pattern reuse
-- Quality assurance and validation
-- Progress tracking and error handling
-
-**When triggered:**
-
-- Automatically in Stage 4 (Implementation)
-- Multiple agents for different implementation phases
-
-**Output:**
-
-- Working, tested code implementations
-- Progress reports and completion status
-- Quality validation results
-- Error handling and debugging guidance
-
-### `tech-writer`
-
-**Purpose**: Creates and maintains comprehensive technical documentation
-
-**Focus areas:**
-
-- API documentation and usage guides
-- Architecture documentation updates
-- Integration instructions and examples
-- Documentation standards compliance
-
-**When triggered:**
-
-- Automatically in Stage 5 (Documentation)
-- Can be launched manually for documentation tasks
-
-**Output:**
-
-- Updated project documentation
-- API reference guides
-- Integration and troubleshooting documentation
-- README updates for affected modules
-
-## Usage Patterns
-
-### Complete SDD workflow (recommended for new features)
-
-Run the full specification-driven development process:
-
-```bash
-# 1. Set up project constitution and templates (run once per project)
-/sdd:00-setup Add security and performance principles
-
-# 2. Create detailed specification
-/sdd:01-specify Add rate limiting to API endpoints with Redis backend
-
-# 3. Plan architecture and research
-/sdd:02-plan Focus on scalability and existing middleware patterns
-
-# 4. Generate implementation tasks
-/sdd:03-tasks Use TDD approach and prioritize MVP features
-
-# 5. Execute implementation
+# Execute the implementation
 /sdd:04-implement Focus on test coverage and error handling
 
-# 6. Document the feature
-/sdd:05-document Include API examples and troubleshooting guide
+# Document the feature
+/sdd:05-document Include API examples and integration guide
 ```
 
-### Partial workflows for specific needs
+[Usage Examples](./usage-examples.md)
 
-**Start with brainstorming unclear ideas:**
+
+## Workflow Diagram
+
+```
+┌─────────────────────────────────────────────┐
+│ 1. Setup Project Standards                  │
+│    /sdd:00-setup                            │
+│    (create specs/constitution.md)           │
+└────────────────────┬────────────────────────┘
+                     │
+                     │ project principles established
+                     ▼
+┌─────────────────────────────────────────────┐
+│ 2. Create Specification                     │ ◀─── clarify requirements ───┐
+│    /sdd:01-specify                          │                              │
+│    (create specs/<feature>/spec.md)         │                              │
+└────────────────────┬────────────────────────┘                              │
+                     │                                                       │
+                     │ validated specification                               │
+                     ▼                                                       │
+┌─────────────────────────────────────────────┐                              │
+│ 3. Plan Architecture                        │──────────────────────────────┘
+│    /sdd:02-plan                             │◀─── refine architecture ─────┐
+│    (create plan.md, design.md, research.md) │                              │
+└────────────────────┬────────────────────────┘                              │
+                     │                                                       │
+                     │ approved architecture                                 │
+                     ▼                                                       │
+┌─────────────────────────────────────────────┐                              │
+│ 4. Break Down into Tasks                    │──────────────────────────────┘
+│    /sdd:03-tasks                            │
+│    (create tasks.md)                        │
+└────────────────────┬────────────────────────┘
+                     │
+                     │ executable task list
+                     ▼
+┌─────────────────────────────────────────────┐
+│ 5. Implement Tasks                          │ ◀─── fix issues ─────────────┐
+│    /sdd:04-implement                        │                              │
+│    (write code, run tests)                  │                              │
+└────────────────────┬────────────────────────┘                              │
+                     │                                                       │
+                     │ working implementation                                │
+                     ▼                                                       │
+┌─────────────────────────────────────────────┐                              │
+│ 6. Quality Review                           │──────────────────────────────┘
+│    (automatic in /sdd:04-implement)         │
+└────────────────────┬────────────────────────┘
+                     │
+                     │ approved changes
+                     ▼
+┌─────────────────────────────────────────────┐
+│ 7. Document Changes                         │
+│    /sdd:05-document                         │
+│    (update docs/ directory)                 │
+└─────────────────────────────────────────────┘
+```
+
+
+## Commands Overview
+
+### /sdd:00-setup - Project Constitution Setup
+
+Create or update the project constitution that establishes development principles, coding standards, and governance rules for all subsequent development.
+
+- Purpose - Establish project-wide development standards and principles
+- Output - `specs/constitution.md` and template files for specs, plans, and tasks
 
 ```bash
-/sdd:brainstorm User wants better search functionality but unclear requirements
+/sdd:00-setup ["principle inputs or constitution parameters"]
 ```
 
-**Jump into planning with existing specification:**
+#### Arguments
+
+Optional principle inputs such as technology stack, architectural patterns, or development guidelines. Examples: "Use NestJS, follow SOLID and Clean Architecture" or "Python with FastAPI, prioritize type safety".
+
+#### How It Works
+
+1. **Template Initialization**: Downloads and creates the constitution template at `specs/constitution.md` along with spec, plan, and tasks templates in `specs/templates/`
+
+2. **Value Collection**: Gathers concrete values for template placeholders from:
+   - User input (conversation)
+   - Existing repo context (README, docs, CLAUDE.md)
+   - Prior constitution versions if present
+
+3. **Constitution Drafting**: Fills the template with:
+   - Project name and description
+   - Development principles (each with name, rules, and rationale)
+   - Governance section with amendment procedures and versioning policy
+   - Compliance review expectations
+
+4. **Consistency Propagation**: Ensures all dependent templates align with updated principles:
+   - `specs/templates/plan-template.md` - Architecture planning template
+   - `specs/templates/spec-template.md` - Feature specification template
+   - `specs/templates/tasks-template.md` - Task breakdown template
+   - `specs/templates/spec-checklist.md` - Specification quality checklist
+
+5. **Sync Impact Report**: Documents version changes, modified principles, and any follow-up TODOs
+
+#### Usage Examples
 
 ```bash
-/sdd:02-plan Focus on performance optimization and caching strategy
+# Initialize with core principles
+/sdd:00-setup Use React with TypeScript, follow atomic design patterns
+
+# Set up for backend project
+/sdd:00-setup NestJS, PostgreSQL, follow hexagonal architecture
+
+# Minimal setup (will prompt for details)
+/sdd:00-setup
+
+# Update existing constitution with new principle
+/sdd:00-setup Add principle: All APIs must be versioned
 ```
 
-**Generate tasks from existing plan:**
+#### Best practices
+
+- Be specific about tech stack - Clear technology choices improve downstream decisions
+- Include architectural patterns - Patterns like Clean Architecture guide agent decisions
+- Review generated templates - Ensure templates align with your team's workflow
+- Version your constitution - Use semantic versioning for governance changes
+
+---
+
+### /sdd:01-specify - Feature Specification
+
+Transform a natural language feature description into a detailed, validated specification with business requirements, user scenarios, and success criteria.
+
+- Purpose - Create comprehensive feature specification from business requirements
+- Output - `specs/<feature-name>/spec.md` with validated requirements
 
 ```bash
-/sdd:03-tasks Break down complex user stories into smaller tasks
+/sdd:01-specify ["feature description"]
 ```
 
-### Manual agent invocation
+#### Arguments
 
-You can also launch agents manually for specific needs:
+Natural language description of the feature to build. Examples: "Add OAuth authentication with Google and GitHub providers" or "Create a dashboard for analytics with real-time data".
 
-**Business analysis:**
+#### How It Works
 
-```text
-Launch business-analyst to refine requirements for user management feature
+1. **Feature Naming**: Generates a concise short name (2-4 words) for the feature branch and spec directory
+
+2. **Branch/Directory Management**:
+   - Checks for existing branches to determine the next available feature number
+   - Creates `specs/<number>-<short-name>/` directory (FEATURE_DIR)
+   - Copies spec template to `FEATURE_DIR/spec.md`
+
+3. **Business Analysis**: Launches `business-analyst` agent to:
+   - Perform requirements discovery and stakeholder analysis
+   - Extract key concepts: actors, actions, data, constraints
+   - Write specification following the template structure
+   - Mark unclear aspects with [NEEDS CLARIFICATION] (max 3)
+
+4. **Specification Validation**: Launches second `business-analyst` agent to:
+   - Fill in `spec-checklist.md` with quality criteria
+   - Review spec against each checklist item
+   - Document specific issues with quoted spec sections
+   - Iterate until all items pass (max 3 iterations)
+
+5. **Clarification Resolution**: If [NEEDS CLARIFICATION] markers remain:
+   - Presents max 3 questions with suggested answers in table format
+   - Options include A, B, C choices plus Custom input
+   - Updates spec with user's chosen answers
+   - Re-validates after clarifications
+
+#### Usage Examples
+
+```bash
+# Define a new feature
+/sdd:01-specify Add user authentication with social login support
+
+# Feature with specific scope
+/sdd:01-specify Create invoice generation with PDF export and email delivery
+
+# Complex feature
+/sdd:01-specify Build real-time collaborative document editing with conflict resolution
+
+# Bug fix specification
+/sdd:01-specify Fix payment timeout issues when processing large transactions
 ```
 
-**Codebase exploration:**
+#### Best practices
 
-```text
-Launch code-explorer to trace how authentication works in this project
+- Focus on WHAT and WHY - Describe the problem and user needs, not implementation
+- Be specific about scope - Clear boundaries prevent scope creep
+- Include success criteria - Measurable outcomes help validation
+- Answer clarification questions - User input improves spec quality
+- Review generated spec - Verify it captures your intent before proceeding
+
+---
+
+### /sdd:02-plan - Architecture Planning
+
+Design the technical architecture with multiple approaches, research unknowns, and create a comprehensive implementation plan with data models and API contracts.
+
+- Purpose - Create detailed architecture design with trade-off analysis
+- Output - `FEATURE_DIR/plan.md`, `design.md`, `research.md`, `data-model.md`, `contracts.md`
+
+```bash
+/sdd:02-plan ["plan specifics or preferences"]
 ```
 
-**Research:**
+#### Arguments
 
-```text
-Launch researcher to investigate Redis vs Memcached for caching
+Optional architecture preferences or constraints. Examples: "Use libraries instead of direct integration" or "Prioritize simplicity over performance".
+
+#### How It Works
+
+1. **Context Loading**: Reads feature specification and project constitution
+
+2. **Research & Exploration** (Stage 2):
+   - Launches `researcher` agent to investigate unknown technologies and dependencies
+   - Launches 2-3 `code-explorer` agents in parallel to:
+     - Find similar features in the codebase
+     - Map architecture and abstractions
+     - Identify UI patterns and testing approaches
+   - Consolidates findings in `FEATURE_DIR/research.md`
+
+3. **Clarifying Questions** (Stage 3):
+   - Reviews codebase findings and original requirements
+   - Identifies underspecified aspects: edge cases, error handling, integration points
+   - Presents questions and waits for user answers
+
+4. **Architecture Design** (Stage 4):
+   - Launches 2-3 `software-architect` agents with different focuses:
+     - **Minimal changes**: Smallest change, maximum reuse
+     - **Clean architecture**: Maintainability, elegant abstractions
+     - **Pragmatic balance**: Speed + quality trade-off
+   - Each produces a design document with trade-offs
+
+5. **Final Plan** (Stage 5):
+   - User selects preferred approach
+   - Launches `software-architect` agent to create final design
+   - Generates:
+     - `FEATURE_DIR/design.md` - Final architecture document
+     - `FEATURE_DIR/plan.md` - Implementation plan
+     - `FEATURE_DIR/data-model.md` - Entity definitions, relationships, validation rules
+     - `FEATURE_DIR/contracts.md` - API endpoints in OpenAPI/GraphQL format
+
+6. **Plan Review** (Stage 6):
+   - Reviews implementation plan for unclear areas
+   - Resolves high-confidence issues automatically
+   - Presents remaining uncertainties to user for clarification
+
+#### Usage Examples
+
+```bash
+# Start architecture planning
+/sdd:02-plan
+
+# With technology preference
+/sdd:02-plan Use Redis for caching, prefer PostgreSQL transactions
+
+# With architectural constraint
+/sdd:02-plan Must integrate with existing auth system, minimize changes
+
+# Performance focus
+/sdd:02-plan Optimize for high throughput, consider async processing
 ```
 
-**Architecture design:**
+#### Best practices
 
-```text
-Launch software-architect to design the API rate limiting architecture
+- Review research findings - Understand what exists before designing
+- Answer architecture questions - Your input shapes the design direction
+- Compare all approaches - Each has trade-offs worth considering
+- Validate data models early - Entity definitions drive implementation
+- Review API contracts - Contracts become the integration specification
+
+---
+
+### /sdd:03-tasks - Task Generation
+
+Generate an actionable, dependency-ordered task list organized by user stories with complexity analysis and parallel execution opportunities.
+
+- Purpose - Break down feature into executable tasks with clear dependencies
+- Output - `FEATURE_DIR/tasks.md` with phased task list
+
+```bash
+/sdd:03-tasks ["task creation guidance"]
 ```
 
-**Task planning:**
+#### Arguments
 
-```text
-Launch tech-lead to break down the payment integration story
+Optional guidance for task creation. Examples: "Use TDD approach and prioritize MVP features" or "Focus on backend first, then frontend".
+
+#### How It Works
+
+1. **Context Loading**: Reads from FEATURE_DIR:
+   - **Required**: plan.md (tech stack, architecture), spec.md (user stories with priorities)
+   - **Optional**: data-model.md, contracts.md, research.md
+
+2. **Task Generation**: Launches `tech-lead` agent to create tasks following:
+
+   **Implementation Strategy Selection**:
+   - **Top-to-Bottom**: Workflow-first when process is clear
+   - **Bottom-to-Top**: Building-blocks-first when algorithms are complex
+   - **Mixed**: Combine approaches for different parts
+
+   **Phase Structure**:
+   - Phase 1: Setup (project initialization)
+   - Phase 2: Foundational (blocking prerequisites)
+   - Phase 3+: User Stories in priority order (P1, P2, P3...)
+   - Final Phase: Polish & cross-cutting concerns
+
+3. **Complexity Analysis**: Each task includes:
+   - Clear goal and acceptance criteria
+   - Technical approach and patterns to use
+   - Dependencies and blocking relationships
+   - **Complexity Rating**: Low/Medium/High
+   - **Uncertainty Rating**: Low/Medium/High
+
+4. **Risk Review**: After generation:
+   - Lists all high-complexity or high-uncertainty tasks
+   - Explains what makes each task risky
+   - Asks if user wants further decomposition
+
+#### Usage Examples
+
+```bash
+# Generate tasks with TDD focus
+/sdd:03-tasks Use TDD approach, write tests before implementation
+
+# MVP prioritization
+/sdd:03-tasks Focus on P1 user stories only for initial release
+
+# Parallel-friendly breakdown
+/sdd:03-tasks Maximize parallel execution opportunities
+
+# Sequential approach
+/sdd:03-tasks Prefer sequential tasks for easier debugging
 ```
 
-**Implementation:**
+#### Best practices
 
-```text
-Launch developer to implement user registration with OAuth
+- Review high-risk tasks - Consider decomposing complex tasks further
+- Validate task dependencies - Ensure parallel tasks are truly independent
+- Check user story coverage - Each story should have complete task set
+- Estimate before starting - Use complexity ratings for planning
+- Keep tasks small - 1-2 day tasks are ideal
+
+---
+
+### /sdd:04-implement - Feature Implementation
+
+Execute the implementation plan by processing all tasks with TDD approach, quality review, and continuous progress tracking.
+
+- Purpose - Implement all tasks following the execution plan
+- Output - Working code with tests passing, updated tasks.md with completion status
+
+```bash
+/sdd:04-implement ["implementation preferences"]
 ```
 
-**Documentation:**
+#### Arguments
 
-```text
-Launch tech-writer to document the new API endpoints
+Optional implementation preferences. Examples: "Focus on test coverage and error handling" or "Prioritize performance optimization".
+
+#### How It Works
+
+1. **Context Loading**: Reads implementation context from FEATURE_DIR:
+   - **Required**: tasks.md, plan.md
+   - **Optional**: data-model.md, contracts.md, research.md
+
+2. **Phase Execution** (Stage 8): For each phase in tasks.md:
+   - Launches `developer` agent to implement the phase
+   - Follows execution rules:
+     - Phase-by-phase: Complete each phase before next
+     - Respect dependencies: Sequential tasks in order, parallel [P] tasks together
+     - TDD approach: Tests before implementation
+     - File coordination: Tasks affecting same files run sequentially
+
+3. **Progress Tracking**:
+   - Reports progress after each completed phase
+   - Marks completed tasks as [X] in tasks.md
+   - Halts on non-parallel task failures
+   - Continues parallel tasks, reports failed ones
+
+4. **Completion Validation**: Launches `developer` agent to verify:
+   - All required tasks completed
+   - Implementation matches specification
+   - Tests pass and coverage meets requirements
+   - Implementation follows technical plan
+
+5. **Quality Review** (Stage 9):
+   - Performs `/code-review:review-local-changes` if available
+   - Otherwise launches 3 `developer` agents focusing on:
+     - Simplicity/DRY/elegance
+     - Bugs/functional correctness
+     - Project conventions/abstractions
+   - Consolidates findings and recommends fixes
+
+6. **User Decision**: Presents findings and asks:
+   - Fix now
+   - Fix later
+   - Proceed as-is
+
+#### Usage Examples
+
+```bash
+# Start implementation
+/sdd:04-implement
+
+# With error handling focus
+/sdd:04-implement Prioritize error handling and edge cases
+
+# Performance-focused
+/sdd:04-implement Optimize for performance, use caching where appropriate
+
+# Test coverage priority
+/sdd:04-implement Achieve 90%+ test coverage
 ```
 
-## Best Practices
+#### Best practices
 
-### SDD Workflow Guidelines
+- Address review findings - Quality issues compound over time
+- Monitor test failures - Fix tests before proceeding
+- Review progress regularly - Check tasks.md for completion status
+- Commit frequently - Save progress after each phase
 
-1. **Start with setup**: Run `/sdd:00-setup` once per project to establish constitution and templates
-2. **Be specific in specifications**: Detailed feature descriptions lead to better specifications and fewer clarification rounds
-3. **Trust the quality gates**: Each stage validates the previous one—don't skip validation steps
-4. **Answer clarifying questions thoroughly**: Specification stage limits questions to 3 most critical ones
-5. **Review architecture options carefully**: Planning stage provides multiple approaches with trade-offs
-6. **Follow task dependencies**: Implementation stage respects task order and dependencies for a reason
-7. **Maintain living documentation**: Documentation stage keeps specs and docs synchronized
+---
 
-### Working with Agents
+### /sdd:05-document - Feature Documentation
 
-1. **Let agents complete their analysis**: Each agent provides valuable insights about your codebase
-2. **Read suggested files**: Agents identify key files—read them to build comprehensive context
-3. **Use agents for learning**: Exploration agents teach you about your own codebase patterns
-4. **Provide context when launching manually**: Give agents specific goals and constraints
+Document the completed feature implementation with API guides, architecture updates, usage examples, and lessons learned.
 
-### Quality and Consistency
+- Purpose - Create comprehensive documentation for implemented feature
+- Output - Updated documentation in `docs/` folder
 
-1. **Follow the constitution**: Project principles guide all decisions and implementations
-2. **Use specifications as contracts**: Generated specs become the source of truth for implementation
-3. **Validate at each stage**: Quality checklists prevent issues from propagating forward  
-4. **Test-driven approach**: Tasks and implementation emphasize testing throughout
+```bash
+/sdd:05-document ["documentation focus areas"]
+```
 
-## When to Use This Plugin
+#### Arguments
 
-**Use SDD workflow for:**
+Optional focus areas for documentation. Examples: "Include API examples and integration guide" or "Focus on troubleshooting common issues".
 
-- New features requiring multiple files or components
-- Features with unclear or evolving requirements
-- Complex integrations with existing systems
-- Features needing comprehensive documentation
-- Projects requiring specification-driven development
-- Features where multiple team members will work
+#### How It Works
 
-**Use individual commands for:**
+1. **Context Loading**: Reads from FEATURE_DIR:
+   - **Required**: tasks.md (verify completion)
+   - **Optional**: plan.md, spec.md, contracts.md, data-model.md
 
-- `/sdd:brainstorm`: Refining vague or unclear ideas
-- `/sdd:02-plan`: Architecture design for existing specs
-- `/sdd:03-tasks`: Breaking down complex user stories
-- Manual agent invocation: Specific analysis or design tasks
+2. **Implementation Verification** (Stage 10):
+   - Reviews tasks.md to confirm all tasks marked [X]
+   - Identifies incomplete or partially implemented tasks
+   - Reviews codebase for missing functionality
+   - **Presents issues to user**: Fix now or later?
 
-**Don't use for:**
+3. **Documentation Update**: Launches `tech-writer` agent following workflow:
+   - Reads all FEATURE_DIR artifacts
+   - Reviews files modified during implementation
+   - Identifies documentation gaps in `docs/`
 
-- Single-line bug fixes or trivial changes
-- Well-defined, simple tasks with clear implementation
-- Urgent hotfixes requiring immediate action
-- Purely cosmetic or styling changes
+4. **Documentation Generation**:
+   - API guides and usage examples
+   - Architecture updates reflecting implementation
+   - README.md updates in affected folders
+   - Development specifics for LLM navigation
+   - Troubleshooting guidance for common issues
 
-## Requirements
+5. **Output Summary**:
+   - Files updated
+   - Major documentation changes
+   - New best practices documented
+   - Project status after this phase
 
-- Claude with access to SDD plugin
-- Git repository for tracking specs and implementation
-- Project structure supporting `specs/` directory
-- Existing codebase (workflow learns from existing patterns)
+#### Usage Examples
 
-## Troubleshooting
+```bash
+# Generate documentation
+/sdd:05-document
 
-### Agents take too long
+# API-focused documentation
+/sdd:05-document Focus on API documentation with curl examples
 
-**Issue**: Research, exploration, or architecture agents are slow
+# Integration guide
+/sdd:05-document Include step-by-step integration guide
 
-**Solution**:
+# Troubleshooting emphasis
+/sdd:05-document Document common errors and solutions
+```
 
-- This is normal for large codebases—agents perform comprehensive analysis
-- Agents run in parallel when possible to optimize time
-- The thoroughness pays off in better understanding and fewer rework cycles
-- Consider breaking down very large features into smaller specifications
+#### Best practices
 
-### Too many clarification questions
+- Complete implementation first - Document working code, not plans
+- Include working examples - Test all code samples
+- Update architecture docs - Reflect actual implementation
+- Document gotchas - Share lessons learned during implementation
+- Cross-reference specs - Link to original requirements
 
-**Issue**: Specification stage asks too many questions
+---
 
-**Solution**:
+### /sdd:brainstorm - Idea Refinement
 
-- Be more specific and detailed in your initial feature description
-- Include context about constraints, existing systems, and user needs upfront
-- Provide business goals and success criteria in the initial request
-- The system limits to 3 questions max—all are critical for quality specs
+Transform rough ideas into fully-formed designs through collaborative dialogue, incremental validation, and design documentation.
 
-### Specification quality issues
+- Purpose - Refine vague ideas into actionable designs
+- Output - Design document in `docs/plans/YYYY-MM-DD-<topic>-design.md`
 
-**Issue**: Generated specifications fail quality checklist
+```bash
+/sdd:brainstorm ["initial feature concept"]
+```
 
-**Solution**:
+#### Arguments
 
-- The system automatically iterates to fix quality issues (max 3 attempts)
-- Business analyst agent addresses specific failing criteria
-- If issues persist, they're documented with explanations for manual review
-- Consider providing more detailed requirements in the initial request
+Optional initial concept to explore. Can be vague: "something to help with user onboarding" or more specific: "real-time notification system".
 
-### Task complexity overwhelming
+#### How It Works
 
-**Issue**: Generated tasks are too complex or numerous
+1. **Context Understanding**:
+   - Reviews current project state (files, docs, recent commits)
+   - Asks questions one at a time to refine the idea
+   - Prefers multiple choice questions when possible
+   - Focuses on: purpose, constraints, success criteria
 
-**Solution**:
+2. **Approach Exploration**:
+   - Proposes 2-3 different approaches with trade-offs
+   - Leads with recommended option and reasoning
+   - Presents options conversationally
 
-- Tech-lead agent identifies high-risk tasks and asks about decomposition
-- Accept the decomposition offer for complex tasks
-- Focus on MVP scope first—implement incrementally
-- Use parallel task execution opportunities to reduce overall timeline
+3. **Design Presentation**:
+   - Breaks design into 200-300 word sections
+   - Asks after each section if it looks right
+   - Covers: architecture, components, data flow, error handling, testing
+   - Ready to clarify if something doesn't make sense
 
-### Implementation failures
+4. **Documentation**:
+   - Writes validated design to `docs/plans/YYYY-MM-DD-<topic>-design.md`
+   - Commits the design document to git
 
-**Issue**: Developer agents can't complete tasks successfully
+5. **Implementation Handoff** (optional):
+   - Asks if ready to set up for implementation
+   - Can create isolated workspace with git worktrees
+   - Can create detailed implementation plan
 
-**Solution**:
+#### Key Principles
 
-- Implementation follows strict acceptance criteria—failures indicate unclear specs
-- Review the specification and planning artifacts for missing information
-- Use `/sdd:02-plan` to revise architecture if needed
-- Consider breaking tasks down further or clarifying requirements
+- **One question at a time** - Don't overwhelm with multiple questions
+- **Multiple choice preferred** - Easier than open-ended when possible
+- **YAGNI ruthlessly** - Remove unnecessary features from designs
+- **Explore alternatives** - Always propose 2-3 approaches before settling
+- **Incremental validation** - Present design in sections, validate each
 
-## Tips
+#### Usage Examples
 
-### Getting Better Results
+```bash
+# Start with vague idea
+/sdd:brainstorm Something to improve user onboarding
 
-- **Provide context upfront**: Include business goals, user needs, and technical constraints in command arguments
-- **Use the full workflow**: Each stage builds on the previous—skipping stages reduces quality
-- **Review generated artifacts**: Specs, plans, and tasks contain valuable insights and decisions
-- **Trust the process**: Quality gates prevent common issues from reaching implementation
-- **Keep specs updated**: Update specifications when requirements change
+# More specific concept
+/sdd:brainstorm Real-time collaboration features for document editing
 
-### Working with Large Features
+# Technical exploration
+/sdd:brainstorm Caching strategy for our product catalog API
 
-- **Start with MVP**: Focus on core functionality first, add enhancements in separate SDD cycles
-- **Break into logical boundaries**: Separate features by user stories or system boundaries
-- **Use constitution principles**: Let project constitution guide complexity and quality decisions
+# Process improvement
+/sdd:brainstorm Automated deployment pipeline for our microservices
+```
 
-### Team Collaboration
+#### Best practices
 
-- **Share specifications**: Generated specs serve as communication artifacts for team members
-- **Document decisions**: Architecture and planning documents capture reasoning for future reference
-- **Use task lists**: Generated tasks can be distributed among team members
-- **Maintain documentation**: Living documentation stays synchronized with implementation
+- Start with the problem - Describe what you're trying to solve
+- Be open to alternatives - The first idea isn't always best
+- Engage with questions - Your answers shape the design
+- Validate incrementally - Catch issues early in design sections
+- Save the design - Use as input for `/sdd:01-specify`
+
+---
+
+## Available Agents
+
+The SDD plugin uses specialized agents for different phases of development:
+
+| Agent | Description | Used By |
+|-------|-------------|---------|
+| `business-analyst` | Requirements discovery, stakeholder analysis, specification writing | `/sdd:01-specify` |
+| `researcher` | Technology research, dependency analysis, best practices | `/sdd:02-plan` |
+| `code-explorer` | Codebase analysis, pattern identification, architecture mapping | `/sdd:02-plan` |
+| `software-architect` | Architecture design, component design, implementation planning | `/sdd:02-plan` |
+| `tech-lead` | Task decomposition, dependency mapping, sprint planning | `/sdd:03-tasks` |
+| `developer` | Code implementation, TDD execution, quality review | `/sdd:04-implement` |
+| `tech-writer` | Documentation creation, API guides, architecture docs | `/sdd:05-document` |
+
+## Foundation
+
+The SDD plugin is based on established software engineering methodologies and research:
+
+### Core Methodologies
+
+- **[GitHub Spec Kit](https://github.com/github/spec-kit)** - Specification-driven development templates and workflows
+- **OpenSpec** - Open specification format for software requirements
+- **BMad Method** - Structured approach to breaking down complex features
+
+### Supporting Research
+
+- **[Specification-Driven Development](https://en.wikipedia.org/wiki/Design_by_contract)** - Design by contract and formal specification approaches
+- **[Agile Requirements Engineering](https://www.agilealliance.org/agile101/)** - User stories, acceptance criteria, and iterative refinement
+- **[Test-Driven Development](https://www.agilealliance.org/glossary/tdd/)** - Writing tests before implementation
+- **[Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)** - Separation of concerns and dependency inversion
+- **[Vertical Slice Architecture](https://jimmybogard.com/vertical-slice-architecture/)** - Feature-based organization for incremental delivery
+
