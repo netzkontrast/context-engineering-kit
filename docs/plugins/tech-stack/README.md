@@ -1,42 +1,69 @@
 # Tech Stack Plugin
 
-> **Status:** Documentation in progress
+Language and framework-specific best practices plugin that configures your CLAUDE.md with standardized coding standards, ensuring consistent code quality across all AI-assisted development.
+
+Focused on:
+
+- **Standardized Guidelines** - Pre-defined best practices for specific languages and frameworks
+- **Initil context building** - Updates of CLAUDE.md, so it will be loaded during every claude code session
 
 ## Overview
 
-Commands for setting up language and framework-specific best practices. Introduces commands for setting up or updating CLAUDE.md file with best practices for specific languages or frameworks.
+The Tech Stack plugin provides commands for setting up language and framework-specific best practices in your CLAUDE.md file. Instead of manually defining coding standards, this plugin provides curated, production-tested guidelines that can be applied with a single command.
 
-## Installation
+When Claude operates with explicit coding standards in CLAUDE.md, it produces more consistent and higher-quality code. The Tech Stack plugin bridges the gap between starting a new project and having well-defined development standards.
+
+## Quick Start
 
 ```bash
+# Install the plugin
 /plugin install tech-stack@NeoLabHQ/context-engineering-kit
+
+# Add TypeScript best practices to your project
+/tech-stack:add-typescript-best-practices
+
+# Review the updated CLAUDE.md
+cat CLAUDE.md
 ```
 
-## Quick Info
+[Usage Examples](./usage-examples.md)
 
-**Plugin Type:** Commands
-**Key Features:**
-- Language-specific best practices
-- Framework guidelines
-- CLAUDE.md integration
-- TypeScript best practices
 
-## Documentation Status
+### Why CLAUDE.md Matters
 
-This plugin documentation is currently being written. For now, please refer to:
+CLAUDE.md is read by Claude at the start of every conversation. By placing coding standards here:
 
-- [Main Plugin Directory](../README.md) - Overview of all plugins
-- [Getting Started Guide](../../getting-started.md) - How to install and use plugins
-- [User Guide](../../user-guide.md) - Comprehensive usage guide
+1. **Persistent Context** - Guidelines are always available to Claude
+2. **Project-Specific Rules** - Different projects can have different standards
+3. **Team Synchronization** - All team members share the same AI configuration
+4. **Version Control** - Guidelines are tracked alongside your code
 
-## Available Commands
+## Commands Overview
 
-- `/tech-stack:add-typescript-best-practices` - Setup TypeScript best practices and code style rules in CLAUDE.md
+### /tech-stack:add-typescript-best-practices - TypeScript Configuration
 
-## More Information
+Sets up TypeScript best practices and code style rules in your CLAUDE.md file, providing Claude with explicit guidelines for generating consistent, type-safe code.
 
-For the latest information about this plugin, see the main [README.md](../../README.md#tech-stack).
+- Purpose - Configure TypeScript coding standards
+- Output - Updated CLAUDE.md with TypeScript guidelines
 
----
+```bash
+/tech-stack:add-typescript-best-practices
+```
 
-*This documentation is part of the [Context Engineering Kit](../../README.md) marketplace.*
+#### Arguments
+
+Optional argument which practices to add or avoid.
+
+#### How It Works
+
+1. **File Detection**: Locates or creates CLAUDE.md in your project root
+
+2. **Content Injection**: Adds the following standardized sections:
+   - **Code Style Rules** - General principles for TypeScript development
+   - **Type System Guidelines** - Interface vs type preferences, enum usage
+   - **Library-First Approach** - Recommended libraries for common tasks
+   - **Code Quality Patterns** - Destructuring, time handling, and more
+
+3. **Non-Destructive Update**: Preserves existing CLAUDE.md content while adding new guidelines
+

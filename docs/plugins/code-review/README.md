@@ -1,10 +1,17 @@
 # Code Review Plugin
 
-Comprehensive code review using multiple specialized agents for thorough code quality evaluation.
+Comprehensive multi-agent code review system that examines code from multiple specialized perspectives to catch bugs, security issues, and quality problems before they reach production.
+
+## Focused on
+
+- **Multi-perspective analysis** - Six specialized agents examine code from different angles
+- **Early bug detection** - Catch bugs before commits and pull requests
+- **Security auditing** - Identify vulnerabilities and attack vectors
+- **Quality enforcement** - Maintain code standards and best practices
 
 ## Overview
 
-The Code Review plugin implements a multi-agent code review system where specialized AI agents examine code from different perspectives including bug detection, security, test coverage, code quality, contracts, and historical context. This provides comprehensive, professional-grade code review before commits or pull requests.
+The Code Review plugin implements a multi-agent code review system where specialized AI agents examine code from different perspectives. Six agents work in parallel: Bug Hunter, Security Auditor, Test Coverage Reviewer, Code Quality Reviewer, Contracts Reviewer, and Historical Context Reviewer. This provides comprehensive, professional-grade code review before commits or pull requests.
 
 ## Quick Start
 
@@ -19,65 +26,152 @@ The Code Review plugin implements a multi-agent code review system where special
 > /code-review:review-pr #123
 ```
 
-## Key Features
+[Usage Examples](./usage-examples.md)
 
-### Multi-Agent Review System
+## Agent Architecture
 
-Six specialized agents examine your code:
+```
+Code Review Command
+        │
+        ├──> Bug Hunter (parallel)
+        ├──> Security Auditor (parallel)
+        ├──> Test Coverage Reviewer (parallel)
+        ├──> Code Quality Reviewer (parallel)
+        ├──> Contracts Reviewer (parallel)
+        └──> Historical Context Reviewer (parallel)
+                │
+                ▼
+        Aggregated Report
+```
 
-1. **Bug Hunter** - Identifies potential bugs, edge cases, error-prone patterns
-2. **Security Auditor** - Finds security vulnerabilities and attack vectors
-3. **Test Coverage Reviewer** - Evaluates test coverage and suggests missing tests
-4. **Code Quality Reviewer** - Assesses structure, readability, maintainability
-5. **Contracts Reviewer** - Reviews interfaces, API contracts, data models
-6. **Historical Context Reviewer** - Analyzes changes relative to codebase history
 
-### Comprehensive Analysis
+## Commands Overview
 
-- Catches bugs before they reach production
-- Identifies security vulnerabilities early
-- Ensures adequate test coverage
-- Maintains code quality standards
-- Validates API contracts and interfaces
-- Considers historical context and patterns
+### /code-review:review-local-changes - Local Changes Review
 
-### Actionable Reports
+Review uncommitted local changes using all specialized agents with code improvement suggestions.
 
-- Structured findings by severity
-- Specific file and line references
-- Code examples and suggestions
-- Prioritized action items
+- Purpose - Comprehensive review before committing
+- Output - Structured report with findings by severity
 
-## When to Use
+```bash
+/code-review:review-local-changes ["review-aspects"]
+```
 
-**Use Code Review when:**
-- Before committing local changes
-- Before creating pull requests
-- After implementing features
-- When refactoring existing code
-- Before deploying to production
+#### Arguments
 
-**Typical workflow:**
-1. Implement feature or changes
-2. Run `/code-review:review-local-changes`
-3. Address findings
-4. Commit changes
-5. Create PR with `/code-review:review-pr`
+Optional review aspects to focus on (e.g., "security", "bugs", "tests")
+
+#### How It Works
+
+1. **Change Detection**: Identifies all uncommitted changes in the working directory
+   - Staged changes
+   - Unstaged modifications
+   - New files
+
+2. **Parallel Agent Analysis**: Spawns six specialized agents simultaneously
+   - Bug Hunter - Identifies potential bugs and edge cases
+   - Security Auditor - Finds security vulnerabilities
+   - Test Coverage Reviewer - Evaluates test coverage
+   - Code Quality Reviewer - Assesses code structure
+   - Contracts Reviewer - Reviews API contracts
+   - Historical Context Reviewer - Analyzes codebase patterns
+
+3. **Finding Aggregation**: Combines all agent reports
+   - Categorizes by severity (Critical, High, Medium, Low)
+   - Removes duplicates
+   - Adds file and line references
+
+4. **Report Generation**: Produces actionable report with prioritized findings
+
+#### Usage Examples
+
+```bash
+# Review all local changes
+> /code-review:review-local-changes
+
+# Focus on security aspects
+> /code-review:review-local-changes security
+
+# After implementing a feature
+> claude "implement user authentication"
+> /code-review:review-local-changes
+```
+
+#### Best Practices
+
+- Review before committing - Run review on local changes before `git commit`
+- Address critical issues first - Fix Critical and High priority findings immediately
+- Iterate after fixes - Run again to verify issues are resolved
+- Combine with reflexion - Use `/reflexion:memorize` to save patterns for future reference
+
+### /code-review:review-pr - Pull Request Review
+
+Comprehensive pull request review using all specialized agents.
+
+- Purpose - Review PR changes before merge
+- Output - Detailed findings with line-specific comments
+
+```bash
+/code-review:review-pr ["PR number or review-aspects"]
+```
+
+#### Arguments
+
+PR number (e.g., #123, 123) and/or review aspects to focus on
+
+#### How It Works
+
+1. **PR Context Loading**: Fetches PR details and diff
+   - Changed files
+   - Commit messages
+   - PR description
+   - Base branch context
+
+2. **Parallel Agent Analysis**: Same six agents analyze the PR diff
+   - Each agent examines changes from their specialty perspective
+   - Considers PR context and commit messages
+
+3. **Finding Aggregation**: Combines findings with PR-specific context
+   - Links findings to specific lines in the diff
+   - Considers breaking changes and backward compatibility
+
+4. **Report Generation**: Produces PR-ready report
+   - Structured for easy review
+   - Action items for the PR author
+
+#### Usage Examples
+
+```bash
+# Review PR by number
+> /code-review:review-pr #123
+
+# Review PR with focus on security
+> /code-review:review-pr #123 security
+
+# Review current branch's PR
+> /code-review:review-pr
+```
+
+#### Best Practices
+
+- Review before requesting human review - Address automated findings first
+- Share report with team - Include findings in PR comments
+- Track patterns - Use findings to improve coding guidelines
+- Don't ignore low priority - Create issues for future improvement
 
 ## Review Agents
 
 ### Bug Hunter
 
-**Focus**: Identifies potential bugs and edge cases
+**Focus**: Identifies potential bugs and edge cases through root cause analysis
 
 **What it catches:**
 - Null pointer exceptions
 - Off-by-one errors
 - Race conditions
-- Memory leaks
-- Resource leaks (file handles, connections)
+- Memory and resource leaks
 - Unhandled error cases
-- Invalid assumptions
 - Logic errors
 
 ### Security Auditor
@@ -89,9 +183,7 @@ Six specialized agents examine your code:
 - XSS vulnerabilities
 - CSRF missing protection
 - Authentication/authorization bypasses
-- Insecure data storage
 - Exposed secrets or credentials
-- Insufficient input validation
 - Insecure cryptography usage
 
 ### Test Coverage Reviewer
@@ -99,27 +191,21 @@ Six specialized agents examine your code:
 **Focus**: Test quality and coverage
 
 **What it evaluates:**
-- Test coverage percentage
-- Missing test cases
-- Edge case testing
+- Test coverage gaps
+- Missing edge case tests
 - Integration test needs
 - Test quality and meaningfulness
-- Test maintainability
-- Mock/stub usage
 
 ### Code Quality Reviewer
 
 **Focus**: Code structure and maintainability
 
 **What it evaluates:**
-- Code complexity (cyclomatic complexity)
+- Code complexity
 - Naming conventions
 - Code duplication
-- Function/class size
-- Separation of concerns
 - Design patterns usage
 - Code smells
-- Documentation quality
 
 ### Contracts Reviewer
 
@@ -128,11 +214,9 @@ Six specialized agents examine your code:
 **What it reviews:**
 - API endpoint definitions
 - Request/response schemas
-- Interface consistency
 - Breaking changes
 - Backward compatibility
 - Type safety
-- Contract documentation
 
 ### Historical Context Reviewer
 
@@ -140,74 +224,13 @@ Six specialized agents examine your code:
 
 **What it analyzes:**
 - Consistency with existing patterns
-- Alignment with project conventions
-- Similar past changes
 - Previous bug patterns
 - Architectural drift
 - Technical debt indicators
 
-## Commands Overview
+## Report Structure
 
-| Command | Purpose | Scope |
-|---------|---------|-------|
-| `/code-review:review-local-changes` | Review uncommitted changes | Working directory |
-| `/code-review:review-pr` | Review pull request | Specific PR |
-
-## Best Practices
-
-### Effective Code Review
-
-1. **Review Early**: Don't wait until PR creation
-2. **Address All Findings**: Or document why you disagree
-3. **Prioritize by Severity**: Critical and High first
-4. **Run Multiple Times**: After fixes to verify
-5. **Combine with Reflexion**: For deeper analysis
-
-### Using Review Results
-
-1. **Critical Issues**: Must fix before committing
-2. **High Priority**: Should fix before PR
-3. **Medium Priority**: Fix if time permits, or create issues
-4. **Low Priority**: Nice to have, consider for refactoring
-
-### Integration Patterns
-
-**Pre-Commit Workflow**:
-```bash
-# Make changes
-> claude "implement feature"
-
-# Review
-> /code-review:review-local-changes
-
-# Fix issues
-> claude "address critical and high priority findings"
-
-# Verify
-> /code-review:review-local-changes
-
-# Commit
-> /git:commit
-```
-
-**PR Workflow**:
-```bash
-# Create PR
-> /git:create-pr
-
-# Review PR
-> /code-review:review-pr #123
-
-# Address findings if needed
-> claude "fix issues from PR review"
-
-# Push updates
-> git push
-```
-
-## Review Report Structure
-
-Reviews provide structured output:
+Reviews produce structured output organized by severity:
 
 ```markdown
 # Code Review Report
@@ -216,138 +239,18 @@ Reviews provide structured output:
 [Overview of changes and quality assessment]
 
 ## Critical Issues (Must Fix)
-- [Issue 1 with location and severity]
-- [Issue 2 with location and severity]
+- [Issue with location and suggested fix]
 
 ## High Priority (Should Fix)
-- [Issue 3]
-- [Issue 4]
+- [Issue with location and suggested fix]
 
 ## Medium Priority (Consider Fixing)
-- [Issue 5]
-- [Issue 6]
+- [Issue with location]
 
 ## Low Priority (Nice to Have)
-- [Issue 7]
-
-## Detailed Agent Reports
-
-### Bug Hunter Findings
-[Detailed findings]
-
-### Security Audit
-[Security findings]
-
-### Test Coverage Analysis
-[Coverage findings]
-
-### Code Quality Assessment
-[Quality findings]
-
-### Contract Review
-[Contract findings]
-
-### Historical Context
-[Context findings]
+- [Issue with location]
 
 ## Action Items
 - [ ] Critical action 1
-- [ ] Critical action 2
 - [ ] High priority action 1
 ```
-
-## Performance Considerations
-
-- **Review Time**: 1-3 minutes depending on change size
-- **Parallel Processing**: Agents run in parallel for efficiency
-- **Context Size**: Large diffs may take longer
-- **Network**: Requires connection for agent spawning
-
-## Integration with Other Plugins
-
-### With Reflexion
-```bash
-> /code-review:review-local-changes
-> /reflexion:critique  # Additional perspective
-> /reflexion:memorize  # Save patterns
-```
-
-### With SDD
-```bash
-> /sdd:04-implement
-> /code-review:review-local-changes
-> /sdd:05-document
-```
-
-### With Git
-```bash
-> /code-review:review-local-changes
-> /git:commit  # After addressing findings
-> /git:create-pr
-> /code-review:review-pr
-```
-
-## Troubleshooting
-
-### Review finds too many issues
-
-**Issue**: Overwhelming number of findings
-
-**Solutions:**
-- Fix Critical and High priority first
-- Create issues for Medium/Low priority
-- Consider refactoring sessions for code quality
-- Update code standards in CLAUDE.md
-
-### Review misses obvious issues
-
-**Issue**: Known bugs not caught
-
-**Solutions:**
-- Run Reflexion critique for additional perspective
-- Check if issue is in scope of review
-- Provide more context about the change
-- Report to improve agent prompts
-
-### Review takes too long
-
-**Issue**: Review running for extended time
-
-**Solutions:**
-- Reduce change size (review incrementally)
-- Check network connection
-- Consider reviewing specific files only
-- Normal for very large changesets (>1000 lines)
-
-## Limitations
-
-### What Code Review Covers
-- Static code analysis
-- Pattern recognition
-- Best practices validation
-- Security vulnerability detection
-- Test coverage assessment
-
-### What Code Review Doesn't Cover
-- Runtime behavior (use testing)
-- Performance profiling (use benchmarks)
-- Load testing (use performance tools)
-- Integration issues (use integration tests)
-- Business logic validation (use domain experts)
-
-## Scientific Foundation
-
-The Code Review plugin implements proven patterns:
-
-- **Multi-Agent Systems**: Specialized agents for thorough analysis
-- **Ensemble Methods**: Multiple perspectives improve accuracy
-- **Static Analysis**: Code pattern recognition
-- **Security Auditing**: OWASP and security best practices
-- **Test Coverage Analysis**: Coverage metrics and gap identification
-
-## Further Reading
-
-- [Commands Reference](./commands.md) - Detailed command documentation
-- [Agents Reference](./agents.md) - Specialized agent descriptions
-- [Installation Guide](./installation.md) - Setup and verification
-- [Usage Examples](./usage-examples.md) - Real-world scenarios

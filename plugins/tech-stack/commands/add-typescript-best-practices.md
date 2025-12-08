@@ -1,6 +1,6 @@
 ---
 description: Setup TypeScript best practices and code style rules in CLAUDE.md
-argument-hint: None required - creates standardized TypeScript guidelines
+argument-hint: Optional argument which practices to add or avoid
 ---
 
 # Setup TypeScript Best Practices
