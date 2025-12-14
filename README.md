@@ -270,12 +270,26 @@ claude
 - `/sdd:04-implement` - Execute feature implementation following task list with TDD approach and quality review
 - `/sdd:05-document` - Document completed feature implementation with API guides, architecture updates, and lessons learned
 - `/sdd:brainstorm` - Refines rough ideas into fully-formed designs through collaborative questioning and exploration
+- `/sdd:create-ideas` - Generate diverse ideas using creative sampling based on Verbalized Sampling technique. 2-3x diversity improvement while maintaining quality.
 
 **Agents**
 
 - **code-architect** - Designs system architecture and technical solutions
 - **code-explorer** - Navigates and understands existing codebase structure
 - **code-reviewer** - Reviews implementations against specifications and quality standards
+
+#### Based on
+
+The SDD plugin implements a structured software development methodology combining proven frameworks:
+
+- [GitHub Spec Kit](https://github.com/github/spec-kit) - Specification-driven development templates and workflows
+- [OpenSpec](https://openspec.ai/) - Open specification format for software requirements
+- [BMad Method](https://github.com/bmadcode/BMAD-METHOD) - Structured approach to breaking down complex features into manageable tasks
+
+Supporting research and techniques:
+
+- [Specification-Driven Development](https://en.wikipedia.org/wiki/Design_by_contract) - Design by contract and formal specification approaches
+- [Verbalized Sampling](https://arxiv.org/abs/2510.01171) - Training-free prompting for diverse idea generation. Achieves **2-3x diversity improvement** while maintaining quality. Used for `create-ideas`, `brainstorm` and `plan` commands.
 
 ### Kaizen
 

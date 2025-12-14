@@ -13,6 +13,10 @@ Resources that contain research that can be used to build plugins.
 [][codemap](https://github.com/JordanCoin/codemap) - map codebase structure
 [][Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 [][mgrep](https://github.com/mixedbread-ai/mgrep)
+[][arxhiv MCP]
+[][docker MCP manager]
+[][Arc42 specification template] - Research Arc42 and adapt it for use in Spec Driven Development.
 [][Opus soul document](https://gist.github.com/Richard-Weiss/efe157692991535403bd7e7fb20b6695)
 [][YAGNI](https://martinfowler.com/bliki/Yagni.html) - Yagni originally is an acronym that stands for “You Aren't Gonna Need It”. It is a mantra from ExtremeProgramming.
 [][Extreme Programming](https://martinfowler.com/bliki/ExtremeProgramming.html)
+[][Beads task traker cli](https://github.com/steveyegge/beads) - maybe better to create new cli with simplified architecture, that useses only TASKS.md file.
