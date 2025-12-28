@@ -165,4 +165,9 @@ Given that feature description, do this:
 
    d. **Update Checklist**: After each validation iteration, update the checklist file with current pass/fail status
 
-5. Report completion with branch name, spec file path, checklist results, and readiness for the next stage `/sdd:01-plan`.
+5. Report completion with a "Feature Specification Summary":
+   - 🎯 **Feature**: [Feature Name]
+   - 📂 **Branch**: `[branch-name]`
+   - 📄 **Spec File**: `[path/to/spec.md]`
+   - ✅ **Checklist Status**: [Pass/Fail details]
+   - ⏭️ **Next Step**: run `/sdd:02-plan` to design the architecture.
