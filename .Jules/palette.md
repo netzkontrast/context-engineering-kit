@@ -1,0 +1,3 @@
+## 2025-05-23 - Interactive & Accessible PR Creation
+**Learning:** Developers often skip PR descriptions or use minimal detail because remembering the CLI flags or template structure is friction.
+**Action:** By baking the "interview" process and a default accessible template directly into the agent's system prompt (the markdown command file), we remove the friction. The agent now *proactively* ensures quality and accessibility considerations (like the checklist) are included by default, rather than relying on the user to remember them. This turns a "command execution" task into a "guided creation" experience.
