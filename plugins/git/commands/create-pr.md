@@ -31,23 +31,48 @@ Check if `gh` is installed, if not follow this instruction to install it:
    gh auth login
    ```
 
-## Creating a New Pull Request
+## Creating a New Pull Request (Interactive Mode)
 
-1. First, prepare your PR description following the template in @.github/pull_request_template.md
+**Goal:** Create a PR that is clear, descriptive, and ready for review.
 
-2. Use the `gh pr create --draft` command to create a new pull request:
+1.  **Check for Template:** Look for a PR template in `.github/pull_request_template.md`.
+    *   If found: Use it as the base for the PR description.
+    *   If missing: **Offer to use the Default Accessible Template** (see below) or create a simple description.
 
-   ```bash
-   # Basic command structure
-   gh pr create --draft --title "✨(scope): Your descriptive title" --body "Your PR description" --base main 
-   ```
+2.  **Gather Information:** Ask the user for the following if not already provided:
+    *   **Scope:** What part of the app does this change? (e.g., `auth`, `ui`, `api`)
+    *   **Type:** What kind of change is it? (Feature, Fix, Docs, etc.)
+    *   **Description:** A brief summary of *what* changed and *why*.
+    *   **Breaking Changes:** Are there any breaking changes?
 
-   For more complex PR descriptions with proper formatting, use the `--body-file` option with the exact PR template structure:
+3.  **Construct Command:**
+    *   Generate a title using the **Emoji + Conventional Commit** format (e.g., `✨(auth): add login flow`).
+    *   Construct the `gh pr create` command. **Always use `--draft` initially** to allow for review.
 
-   ```bash
-   # Create PR with proper template structure
-   gh pr create --draft --title "✨(scope): Your descriptive title" --body-file .github/pull_request_template.md --base main
-   ```
+    ```bash
+    gh pr create --draft --title "TYPE(SCOPE): TITLE" --body "DESCRIPTION" --base main
+    ```
+
+## Default Accessible Template
+
+If no project-specific template exists, use this structure to ensure quality and accessibility:
+
+```markdown
+## 💡 Summary
+<!-- What changes are being made? -->
+
+## 🎯 Motivation
+<!-- Why are these changes necessary? Link to issue if applicable. -->
+
+## 📸 Screenshots (if appropriate)
+<!-- For UI changes, please attach before/after screenshots. -->
+
+## ♿ Accessibility Checklist
+- [ ] Semantic HTML used
+- [ ] Keyboard navigable
+- [ ] Color contrast checked
+- [ ] Screen reader friendly (ARIA labels added where needed)
+```
 
 ## Best Practices
 
@@ -61,25 +86,20 @@ Check if `gh` is installed, if not follow this instruction to install it:
      - `✨(supabase): Add staging remote configuration`
      - `🐛(auth): Fix login redirect issue`
      - `📝(readme): Update installation instructions`
+     - `♿️(a11y): Improve button contrast`
 
-3. **Description Template**: Always use our PR template structure from @.github/pull_request_template.md:
+3. **Description Template**: Always use our PR template structure from @.github/pull_request_template.md if it exists.
 
-4. **Template Accuracy**: Ensure your PR description precisely follows the template structure:
-
-   - Don't modify or rename the PR-Agent sections (`pr_agent:summary` and `pr_agent:walkthrough`)
-   - Keep all section headers exactly as they appear in the template
-   - Don't add custom sections that aren't in the template
-
-5. **Draft PRs**: Start as draft when the work is in progress
+4. **Draft PRs**: Start as draft when the work is in progress
    - Use `--draft` flag in the command
    - Convert to ready for review when complete using `gh pr ready`
 
-### Common Mistakes to Avoid
+### Success Checklist
 
-1. **Using Non-English Text**: All PR content must be in English
-2. **Incorrect Section Headers**: Always use the exact section headers from the template
-3. **Adding Custom Sections**: Stick to the sections defined in the template
-4. **Using Outdated Templates**: Always refer to the current @.github/pull_request_template.md file
+1.  **English Only**: All PR content is in English.
+2.  **Correct Headers**: Section headers match the template.
+3.  **Accessibility**: You've considered the impact on users with disabilities.
+4.  **Screenshots**: Visual changes include screenshots for easier review.
 
 ### Missing Sections
 
@@ -112,19 +132,9 @@ gh pr edit <PR-NUMBER> --add-reviewer username1,username2
 gh pr merge <PR-NUMBER> --squash
 ```
 
-## Using Templates for PR Creation
-
-To simplify PR creation with consistent descriptions, you can create a template file:
-
-1. Create a file named `pr-template.md` with your PR template
-2. Use it when creating PRs:
-
-```bash
-gh pr create --draft --title "feat(scope): Your title" --body-file pr-template.md --base main
-```
-
 ## Related Documentation
 
 - [PR Template](.github/pull_request_template.md)
 - [Conventional Commits](https://www.conventionalcommits.org/)
 - [GitHub CLI documentation](https://cli.github.com/manual/)
+- [Gitmoji Guide](https://gitmoji.dev/)
