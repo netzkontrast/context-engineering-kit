@@ -18,11 +18,15 @@ You are updating the project constitution at `specs/constitution.md`, create fol
 
 Follow this execution flow:
 
-1. Write the existing constitution template to `specs/constitution.md` file.
+1. **Greeting & Intent**:
+   - Briefly acknowledge the user's request (e.g., "I'll help you set up the project constitution...").
+   - If the user input implies specific principles (e.g., "Use strict TDD"), confirm you will incorporate them.
+
+2. Write the existing constitution template to `specs/constitution.md` file.
    - Identify every placeholder token of the form `[ALL_CAPS_IDENTIFIER]`.
    **IMPORTANT**: The user might require less or more principles than the ones used in the template. If a number is specified, respect that - follow the general template. You will update the doc accordingly.
 
-2. Collect/derive values for placeholders:
+3. Collect/derive values for placeholders:
    - If user input (conversation) supplies a value, use it.
    - Otherwise infer from existing repo context (README, docs, CLAUDE.md,prior constitution versions if embedded).
    - For governance dates: `RATIFICATION_DATE` is the original adoption date (if unknown ask or mark TODO), `LAST_AMENDED_DATE` is today if changes are made, otherwise keep previous.
@@ -32,19 +36,19 @@ Follow this execution flow:
      - PATCH: Clarifications, wording, typo fixes, non-semantic refinements.
    - If version bump type ambiguous, propose reasoning before finalizing.
 
-3. Draft the updated constitution content:
+4. Draft the updated constitution content:
    - Replace every placeholder with concrete text (no bracketed tokens left except intentionally retained template slots that the project has chosen not to define yet—explicitly justify any left).
    - Preserve heading hierarchy and comments can be removed once replaced unless they still add clarifying guidance.
    - Ensure each Principle section: succinct name line, paragraph (or bullet list) capturing non‑negotiable rules, explicit rationale if not obvious.
    - Ensure Governance section lists amendment procedure, versioning policy, and compliance review expectations.
 
-4. Consistency propagation checklist (convert prior checklist into active validations):
+5. Consistency propagation checklist (convert prior checklist into active validations):
    - Write `specs/templates/plan-template.md` if it not exists and ensure any "Constitution Check" or rules align with updated principles.
    - Write `specs/templates/spec-template.md` if it not exists and ensure scope/requirements alignment—update if constitution adds/removes mandatory sections or constraints.
    - Write `specs/templates/tasks-template.md` if it not exists and ensure task categorization reflects new or removed principle-driven task types (e.g., observability, versioning, testing discipline).
    - Read any runtime guidance docs (e.g., `README.md`, `docs/quickstart.md`, or agent-specific guidance files if present). Update references to principles changed.
 
-5. Produce a Sync Impact Report (prepend as an HTML comment at top of the constitution file after update):
+6. Produce a Sync Impact Report (prepend as an HTML comment at top of the constitution file after update):
    - Version change: old → new
    - List of modified principles (old title → new title if renamed)
    - Added sections
@@ -52,18 +56,21 @@ Follow this execution flow:
    - Templates requiring updates (✅ updated / ⚠ pending) with file paths
    - Follow-up TODOs if any placeholders intentionally deferred.
 
-6. Validation before final output:
+7. Validation before final output:
    - No remaining unexplained bracket tokens.
    - Version line matches report.
    - Dates ISO format YYYY-MM-DD.
    - Principles are declarative, testable, and free of vague language ("should" → replace with MUST/SHOULD rationale where appropriate).
 
-7. Write the completed constitution back to `specs/constitution.md` (overwrite).
+8. Write the completed constitution back to `specs/constitution.md` (overwrite).
 
-8. Output a final summary to the user with:
-   - New version and bump rationale.
-   - Any files flagged for manual follow-up.
-   - Suggested commit message (e.g., `docs: amend constitution to vX.Y.Z (principle additions + governance update)`).
+9. Output a **Final Summary** to the user with the following structure:
+   - 🎉 **Success**: A friendly message confirming the constitution is ready.
+   - 📝 **Version**: The new version (e.g., `v1.0.0`) and bump rationale.
+   - 📂 **Files Created/Updated**: A list of files modified.
+   - ⚠️ **Action Items**: Any manual follow-ups needed (e.g., filling in TODOs).
+   - 💡 **Next Steps**: Suggest running `/sdd:01-specify` to start a new feature.
+   - 💻 **Commit Suggestion**: `docs: amend constitution to vX.Y.Z (principle additions + governance update)`
 
 Formatting & Style Requirements:
 
