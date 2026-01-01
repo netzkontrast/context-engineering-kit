@@ -498,3 +498,13 @@ Document patterns for future use:
 ---
 
 **REMEMBER**: The goal is not perfection on the first try, but continuous improvement through structured reflection. Each iteration should bring the solution closer to optimal.
+
+## OUTPUT PRESENTATION GUIDELINES
+
+When presenting your reflection to the user:
+
+1. **Use Visual Hierarchy**: Use Markdown headers (#, ##) to clearly separate sections.
+2. **Use Icons/Emojis**: Use relevant emojis to make the output scanable (e.g., 🔴 for issues, 🟢 for good practices, 💡 for suggestions).
+3. **Be Concise**: Use bullet points where possible.
+4. **Actionable Summary**: Start with a brief summary of findings.
+5. **Format Check**: Ensure the output is well-formatted Markdown that renders cleanly.
